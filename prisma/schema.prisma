@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  tickets    Ticket[]
+  aiSessions AISession[]
+}
+
+model Ticket {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  category    String
+  priority    String
+  status      String
+  createdDate DateTime @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+}
+
+model AISession {
+  id            Int      @id @default(autoincrement())
+  title         String
+  description   String
+  aiResponse    String
+  resolvedByAI  Boolean
+  createdDate   DateTime @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+}
