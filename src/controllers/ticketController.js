@@ -1,6 +1,6 @@
 const prisma = require("../config/prisma");
 
-// Create a ticket
+
 const createTicket = async (req, res) => {
   try {
     const {
@@ -30,7 +30,7 @@ const createTicket = async (req, res) => {
   }
 };
 
-// Get all tickets for the logged-in user
+
 const getTickets = async (req, res) => {
   try {
     const tickets = await prisma.ticket.findMany({
@@ -51,7 +51,6 @@ const getTickets = async (req, res) => {
   }
 };
 
-// Get one ticket by ID
 const getTicketById = async (req, res) => {
   try {
     const id = Number(req.params.id);
